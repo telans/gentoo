@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
+	<maintainer type="person">
+		<email>telans@posteo.de</email>
+		<name>Theo Anderson</name>
+	</maintainer>
 	<maintainer type="project">
-		<email>desktop-misc@gentoo.org</email>
-		<name>Gentoo Desktop Miscellaneous Project</name>
+		<name>Proxy Maintainers</name>
+		<email>proxy-maint@gentoo.org</email>
 	</maintainer>
 	<longdescription>
 		i3status is a small program (about 1500 SLOC) for generating a status bar for
