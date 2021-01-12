@@ -1,0 +1,27 @@
+From bbaf55b2b034a1cd8447c5787c4314236d348f79 Mon Sep 17 00:00:00 2001
+From: Zygo Blaxell <bees@furryterror.org>
+Date: Thu, 17 Dec 2020 16:43:15 -0500
+Subject: [PATCH] roots: make it build with clang
+
+Remove an unnecessary cast that was breaking namespace lookup for clang.
+
+Closes: #159
+
+Signed-off-by: Zygo Blaxell <bees@furryterror.org>
+---
+ src/bees-roots.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/bees-roots.cc b/src/bees-roots.cc
+index 8e05a3e8..a0c2fd60 100644
+--- a/src/bees-roots.cc
++++ b/src/bees-roots.cc
+@@ -1011,7 +1011,7 @@ BeesCrawl::fetch_extents()
+ 	// Lock in the old state
+ 	set_state(old_state);
+ 
+-	BEESTRACE("Searching crawl sk " << static_cast<btrfs_ioctl_search_key&>(sk));
++	BEESTRACE("Searching crawl sk " << sk);
+ 	bool ioctl_ok = false;
+ 	{
+ 		BEESNOTE("searching crawl sk " << static_cast<btrfs_ioctl_search_key&>(sk));
