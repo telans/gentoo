@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
 QTVER=$(ver_cut 1-3)
-inherit estack flag-o-matic multiprocessing python-any-r1 qt5-build
+inherit estack flag-o-matic multiprocessing python-any-r1 qt5-build toolchain-funcs
 
 DESCRIPTION="Library for rendering dynamic web content in Qt5 C++ and QML applications"
 HOMEPAGE="https://www.qt.io/"
@@ -145,6 +145,11 @@ src_prepare() {
 	# bug 620444 - ensure local headers are used
 	find "${S}" -type f -name "*.pr[fio]" | \
 		xargs sed -i -e 's|INCLUDEPATH += |&$${QTWEBENGINE_ROOT}_build/include $${QTWEBENGINE_ROOT}/include |' || die
+
+	# src/3rdparty/gn fails with libc++ due to passing of `-static-libstdc++`
+	if tc-is-clang && has_version 'sys-devel/clang[default-libcxx]'; then
+		eapply "${FILESDIR}/${PN}-5.15.2_p20210521-clang-libc++.patch"
+	fi
 
 	if use system-icu; then
 		# Sanity check to ensure that bundled copy of ICU is not used.
